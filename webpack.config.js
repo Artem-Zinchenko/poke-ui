@@ -1,6 +1,8 @@
 'use strict';
-const webpack = require("webpack");
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require("webpack");
 const path = require('path');
 
 module.exports = {
@@ -11,12 +13,26 @@ module.exports = {
         filename: '[name].js',
         publicPath: ''
     },
-    module: {},
+    module: {
+        loaders: [
+            {
+                test: /\.js?$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['react', 'es2015', 'stage-0'],
+                    plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties', 'transform-object-rest-spread'],
+                }
+            },
+        ]
+    },
     plugins: [
+        new ExtractTextPlugin(`css/[name].css`),
         new HtmlWebpackPlugin({
             template: `${__dirname}/src/index.html`,
             hash: true
         }),
+        new webpack.HotModuleReplacementPlugin()
     ]
 
 }

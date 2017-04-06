@@ -1,3 +1,7 @@
-/**
- * Created by artem on 06.04.17.
- */
+'use strict';
+
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App";
+
+ReactDOM.render(<App/>,   document.getElementById('app'));
