@@ -1,0 +1,13 @@
+#%RAML 0.8
+title: Mock API
+version: v1
+mediaType: application/json
+
+
+/pokeapi:
+    get:
+        responses:
+            200:
+             body:
+                application/json:
+                    example: !include pokeapi.json
